@@ -1,9 +1,7 @@
 import random
 
 EXCHANGER_RANGE = (10.17, 10.22)
-
 COVER_RANGE = (2.38, 2.44)
-
 DEPTH_TOLERANCE_RANGE = (0.09, 0.12)
 
 
