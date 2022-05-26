@@ -27,9 +27,9 @@ def generate_set() -> tuple:
           f"Total depth: {total_depth}\n" \
           f"Deviation: {dev}"
 
-    output = exch_depth, cover_depth, total_depth
+    assert dev < 0.2, "Deviation exceeded 0.2mm! Check the DEPTH_TOLERANCE_RANGE."
 
-    return output
+    return exch_depth, cover_depth, total_depth
 
 
 if __name__ == '__main__':
