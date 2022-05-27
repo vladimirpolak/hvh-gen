@@ -1,5 +1,10 @@
+chardet==4.0.0
+et-xmlfile==1.1.0
 lml==0.1.0
 lxml==4.8.0
+openpyxl==3.0.10
+pyexcel==0.7.0
 pyexcel-ezodf==0.3.4
 pyexcel-io==0.6.6
 pyexcel-ods3==0.6.1
+texttable==1.6.4
