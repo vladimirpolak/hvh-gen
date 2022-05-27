@@ -4,8 +4,18 @@ from collections import defaultdict
 
 # https://pypi.org/project/pyexcel-ods3/
 
-data = defaultdict(list)
-for _ in range(1000):
-    data["Sheet 1"].append(generate_set())
+data = []
+for _ in range(279):
+    line = []
+    generated_values = generate_set()
+    for value in generated_values:
+        line.append(str(value))
 
-save_data("example.ods", data)
+    line.append("OK")
+    data.append(line)
+
+with open("my-data.csv", "w") as f:
+    for l in data:
+        f.write(",".join(l))
+        f.write("\n")
+# save_data("example.ods", data)
