@@ -1,11 +1,13 @@
 import random
+import argparse
+
 
 EXCHANGER_RANGE = (10.17, 10.22)
 COVER_RANGE = (2.38, 2.44)
 DEPTH_TOLERANCE_RANGE = (0.09, 0.12)
 
 
-def generate_set() -> tuple:
+def generate_set() -> list:
     """
     Generates set of 3 numbers.
     (depth of exchanger,
@@ -29,9 +31,49 @@ def generate_set() -> tuple:
 
     assert dev < 0.2, "Deviation exceeded 0.2mm! Check the DEPTH_TOLERANCE_RANGE."
 
-    return exch_depth, cover_depth, total_depth
+    return [exch_depth, cover_depth, total_depth]
 
 
 if __name__ == '__main__':
-    for _ in range(9):
-        print(generate_set())
+    parser = argparse.ArgumentParser()
+
+    # Amount of values per sheet
+    parser.add_argument("amount", help="Amount of values per sheet.")
+    # Number of sheets
+    parser.add_argument("-c", "--count", help="Number of sheets generated.")
+    # Include 'OK' value
+    parser.add_argument("-k", action="store_true", help="Whether or not to include the 'OK' value. (default=True)")
+
+    args = parser.parse_args()
+    try:
+        amount = int(args.amount)
+    except ValueError:
+        raise Exception("Argument 'amount' must be a whole number!")
+
+    try:
+        sheet_count = int(args.count) if args.count else 1
+    except (ValueError, TypeError):
+        raise Exception("Argument 'count' must be a whole number!")
+
+    include_k = args.k
+
+    # Loop through amount of sheets required
+    for step in range(1, sheet_count+1):
+
+        # Start the .csv file
+        with open(f"{step}_{amount}.csv", "w") as f:
+
+            # Loop through number of required values
+            for _ in range(amount):
+
+                # Generates values and converts them to string format with 2 digits following the decimal point
+                generated_values = ["{:0.2f}".format(value) for value in generate_set()]
+
+                # Add 'OK' value if required
+                if include_k:
+                    generated_values.append("OK")
+
+                # Write the line into the file
+                f.write(",".join(generated_values))
+                f.write("\n")
+
