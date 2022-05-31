@@ -38,23 +38,16 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # Amount of values per sheet
-    parser.add_argument("amount", help="Amount of values per sheet.")
+    parser.add_argument("amount", type=int, help="Amount of values per sheet.")
     # Number of sheets
-    parser.add_argument("-c", "--count", help="Number of sheets generated.")
+    parser.add_argument("-c", "--count", type=int, help="Number of sheets generated. (default=1)")
     # Include 'OK' value
     parser.add_argument("-k", action="store_true", help="Whether or not to include the 'OK' value. (default=True)")
 
     args = parser.parse_args()
-    try:
-        amount = int(args.amount)
-    except ValueError:
-        raise Exception("Argument 'amount' must be a whole number!")
 
-    try:
-        sheet_count = int(args.count) if args.count else 1
-    except (ValueError, TypeError):
-        raise Exception("Argument 'count' must be a whole number!")
-
+    amount = args.amount
+    sheet_count = args.count if args.count else 1
     include_k = args.k
 
     # Loop through amount of sheets required
