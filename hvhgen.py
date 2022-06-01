@@ -2,9 +2,9 @@ import random
 import argparse
 
 
-EXCHANGER_RANGE = (10.17, 10.22)
-COVER_RANGE = (2.38, 2.44)
-DEPTH_TOLERANCE_RANGE = (0.09, 0.12)
+EXCHANGER_RANGE = (10.17, 10.28)
+COVER_RANGE = (2.36, 2.46)
+DEPTH_TOLERANCE_RANGE = (0.08, 0.12)
 
 
 def generate_set() -> list:
